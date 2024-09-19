@@ -1,0 +1,70 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Editar Médico{% endblock %}
+
+{% block titulo %}Editar Médico{% endblock %}
+
+{% block conteudo %}
+<h3>Edição do Médico Selecionado</h3>
+<hr>
+<p class="lead">Verifique as informações cadastradas e faça as devidas alterações.</p>
+<form action="{% url 'editar' lista_medicos.pk %}" method="POST">
+    {% csrf_token %}
+    
+    <div class="form-group row mb-3">
+        <label for="medicoNome" class="col-sm-2 col-form-label">Nome:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control border-2" id="medicoNome" name="nome_medico" value="{{ lista_medicos.nome_medico }}">
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="medicoEspecialidade" class="col-sm-2 col-form-label">Especialização:</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control border-2" id="medicoEspecialidade" name="especializacao" value="{{ lista_medicos.especializacao }}">
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="medicoCrm" class="col-sm-2 col-form-label">CRM:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control border-2" id="medicoCrm" name="crm" value="{{ lista_medicos.crm }}">
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="medicoEmail" class="col-sm-2 col-form-label">E-mail:</label>
+        <div class="col-sm-4">
+            <input type="email" class="form-control border-2" id="medicoEmail" name="email" value="{{ lista_medicos.email }}">
+        </div>
+    </div>
+
+    <div class="form-group row mb-3">
+        <label for="medicoFone" class="col-sm-2 col-form-label">Telefone:</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control border-2" id="medicoFone" name="telefone" value="{{ lista_medicos.telefone }}"
+                   placeholder="(99) 99999-9999"
+                   oninput="formatPhoneNumber(this)">
+        </div>
+    </div>
+
+    <div class="update">
+        <button type="submit" class="btn btn-success">Atualizar</button>
+        <a href="{% url 'alterar' %}" class="btn btn-danger">Voltar</a>
+    </div>
+    
+</form>
+
+<script>
+function formatPhoneNumber(input) {
+    let numbers = input.value.replace(/\D/g, '');
+
+    if (numbers.length <= 10) {
+        input.value = numbers.replace(/^(\d{2})(\d{0,5})(\d{0,4})$/, '($1) $2-$3');
+    } else {
+        input.value = numbers.replace(/^(\d{2})(\d{5})(\d{0,4})$/, '($1) $2-$3');
+    }
+}
+</script>
+
+{% endblock %}

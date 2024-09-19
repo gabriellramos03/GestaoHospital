@@ -1,0 +1,360 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Guia Medico</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Bootstrap App Landing Template">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="Guia Medico">
+  <meta name="generator" content="texs">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/slick/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/slick/slick-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/fancybox/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/aos/aos.css' %}">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body class="body-wrapper" data-spy="scroll" data-target=".privacy-nav">
+
+
+  <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img class="logo" src="{% static 'images/logo.jpg' %}" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="ti-menu"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lancar' %}">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'alterar' %}">Alterar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'visualizar' %}">Visualizar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Usuário: {{ user.email }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>              
+            </ul>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  
+  
+
+<!--================================
+=            Page Title            =
+=================================-->
+
+<section class="section page-title">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 m-auto">
+				<!-- Page Title -->
+				<h1>Sobre Gestão Hospitalar</h1>
+				<!-- Page Description -->
+				<p>Nosso sistema de gestão hospitalar foi desenvolvido para otimizar a administração e o funcionamento de instituições de saúde, proporcionando uma abordagem integrada e eficiente. Com funcionalidades que abrangem desde o agendamento de consultas até o controle de estoque de medicamentos, nossa plataforma visa facilitar a comunicação entre equipes, melhorar a experiência do paciente e garantir a conformidade com as normas regulatórias.</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!--====  End of Page Title  ====-->
+
+
+<!--===============================
+=            Our Story            =
+================================-->
+<section class="section about p-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 align-self-center">
+				<div class="content text-center text-lg-left">
+					<!-- Headline -->
+					<h2>Esta é a nossa história.</h2>
+					<!-- Story -->
+					<p>Estamos aqui para aqueles que buscam excelência na saúde. Que não se contentam com o comum. Que continuam a inovar e a oferecer experiências de cuidado excepcionais em cada atendimento. Porque o mundo da saúde exige um hospital que seja tão progressivo quanto você. Um que se adapte às suas necessidades, ofereça conforto e constantemente leve você a novos horizontes de bem-estar.</p>
+				</div>
+			</div>
+			<div class="col-lg-6 mt-4 mt-lg-0">
+				<!-- Story Image Slider -->
+				<div class="about-slider">
+					<!-- Story Image -->
+					<div class="item">
+						<img class="w-100" src="https://www.seti.pr.gov.br/sites/default/arquivos_restritos/files/imagem/2023-08/captura_de_tela_2023-08-02_142212.png" alt="slider-image">
+					</div>
+                    <div class="item">
+						<img class="w-100" src="https://t4.ftcdn.net/jpg/01/24/92/83/360_F_124928348_gmLHtItkKNtTTHiNVN2Fz2WjinAZF1jl.jpg" alt="slider-image">
+					</div>
+                    <div class="item">
+						<img class="w-100" src="https://img.freepik.com/fotos-premium/corredor-do-hospital-com-quartos-em-um-design-de-plano-de-fundo-padrao-de-icone-de-saude_878783-3965.jpg" alt="slider-image">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--====  End of Our Story  ====-->
+
+<!--================================
+=            Behind Story          =
+=================================-->
+<section class="section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title mb-0">
+					<h2>Estamos aqui para aqueles que buscam excelência na gestão hospitalar<a href="#"></a></h2>
+					<p>Que não se contentam com o comum. Que continuam a inovar e a oferecer experiências administrativas excepcionais em cada operação. Porque o mundo da saúde exige uma gestão que seja tão progressiva quanto você. Uma que se adapte às suas necessidades, otimize processos e constantemente leve sua instituição a novos patamares de eficiência e cuidado.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section create-stories pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="block">
+					<img class="img-fluid" src="https://themewagon.github.io/small-apps/images/blog/post-03.jpg" alt="Story-Image">
+					<h3>Nossa História</h3>
+					<p>No coração da inovação na gestão hospitalar, nossa missão é transformar a maneira como as instituições de saúde operam. Desde o início, temos nos dedicado a criar soluções que simplificam processos, melhoram a comunicação e elevam o padrão de atendimento ao paciente.</p>
+				</div>
+			</div>
+			<div class="col-lg-6 mt-5 mt-lg-0">
+				<div class="block">
+					<img class="img-fluid" src="https://themewagon.github.io/small-apps/images/blog/post-01.jpg" alt="Story-Image">
+					<h3>O Que Fazemos</h3>
+					<p>Oferecemos soluções integradas para a gestão hospitalar, focando na melhoria da eficiência operacional e na experiência do paciente. Nossos sistemas foram desenvolvidos para otimizar processos administrativos, clínicos e financeiros, permitindo que as instituições de saúde funcionem com mais agilidade e precisão.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section quotes pt-0">
+	<div class="container">
+		<div class="row">
+			<div class="col-10 m-auto text-center">
+				<div class="quote-slider">
+					<div class="item mb-4">
+						<h2>Procurando Salvar Vidas.</h2>
+						<cite class="ml-0">-TechHospital</cite>
+					</div>
+					<div class="item mb-4">
+						<h2>Procurando Salvar Vidas.</h2>
+						<cite class="ml-0">-TechHospital</cite>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section clients bg-gray">
+	<div class="container">
+		<div class="row">
+			<div class="col-10 m-auto text-center">
+				<h3>Destaque em</h3>
+				<div class="client-slider">
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/business-finder.png' %}" alt="business-finder">
+                    </div>
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/forbes.png' %}" alt="forbes">
+                    </div>
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/venture-beat.png' %}" alt="venture-beat">
+                    </div>
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/tech-crunch-new.png' %}" alt="TechCrunch">
+                    </div>
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/forbes.png' %}" alt="forbes">
+                    </div>
+                    <div class="item mb-4">
+                        <img class="m-auto" src="{% static 'images/clients/venture-beat.png' %}" alt="venture-beat">
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="section investors">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h2>Os nossos investidores</h2>
+					<p>Nossos investidores são parte fundamental da nossa jornada. Eles compartilham nossa visão de transformar a gestão hospitalar, oferecendo suporte e recursos que nos permitem inovar continuamente. Acreditamos que, juntos, podemos impactar positivamente o setor de saúde, promovendo eficiência e melhorando a experiência dos pacientes. </p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/marketing-team-01.jpg' %}" alt="investor">
+					</div>
+					<h3>João</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/marketing-team-02.jpg' %}" alt="investor">
+					</div>
+					<h3>Mario</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/marketing-team-03.jpg' %}" alt="investor">
+					</div>
+					<h3>Maria</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/design-team-01.jpg' %}" alt="investor">
+					</div>
+					<h3>Julia</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/design-team-02.jpg' %}" alt="investor">
+					</div>
+					<h3>Romario</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/design-team-03.jpg' %}" alt="investor">
+					</div>
+					<h3>Isabela</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/design-team-01.jpg' %}" alt="investor">
+					</div>
+					<h3>Ana</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-sm-6">
+				<div class="block text-center">
+					<div class="image shadow hover-zoom">
+						<img class="img-fluid" src="{% static 'images/team/marketing-team-02.jpg' %}" alt="investor">
+					</div>
+					<h3>Uendel</h3>
+					<p>Investor</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+  <div class="footer-main">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-4 col-md-12 m-md-auto align-self-center text-center">
+                  <div class="block">
+                      <a href="index.html"><img class="logo" src="{% static 'images/logoSemFundo.png' %}" alt="footer-logo"></a>
+                      <ul class="social-icon list-inline justify-content-center"> 
+                          <li class="list-inline-item">
+                              <a href="#"><i class="ti-facebook"></i></a>
+                          </li>
+                          <li class="list-inline-item">
+                              <a href="#"><i class="ti-twitter"></i></a>
+                          </li>
+                          <li class="list-inline-item">
+                              <a href="#"><i class="ti-instagram"></i></a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+              {% if user.is_authenticated %}
+              <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                  <div class="block-2">
+                      <h6>Links uteis</h6>
+                      <ul>
+                          <li><a href="{% url 'home' %}">Pagina Incial</a></li>
+                          <li><a href="{% url 'lancar' %}">Cadastro</a></li>
+                          <li><a href="{% url 'alterar' %}">Alterar</a></li>
+                          <li><a href="{% url 'visualizar' %}">Visualizar</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                  <div class="block-2">
+                      <h6>Recursos</h6>
+                      <ul>
+                          <li><a href="#">E-mail Ultilizado: {{ user.email }}</a></li>
+                          <li><a href="{% url 'logout' %}">Logout</a></li>
+                      </ul>
+                  </div>
+              </div>
+              {% endif %}
+          </div>
+      </div>
+  </div>
+  <div class="text-center bg-dark py-4">
+      <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Uendel &amp; Gabriel</small>
+  </div>
+
+  <div class="text-center bg-dark py-1">
+      <small><p>Criado por <a href="#">Uendel e Gabriel</a></p></small>
+  </div>
+</footer>
+
+  <div class="scroll-top-to">
+    <i class="ti-angle-up"></i>
+  </div>
+  
+  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+  <script src="{% static 'plugins/slick/slick.min.js' %}"></script>
+  <script src="{% static 'plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'plugins/syotimer/jquery.syotimer.min.js' %}"></script>
+  <script src="{% static 'plugins/aos/aos.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+  <script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

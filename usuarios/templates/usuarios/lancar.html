@@ -1,0 +1,69 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Cadastrar Médicos{% endblock %}
+
+{% block titulo %}Cadastrar Médicos{% endblock %}
+
+{% block conteudo %}
+<div class="container my-5">
+    <div class="card">
+        <div class="card-body">
+            <p class="lead text-center mb-4" style="font-weight: bold; font-size: 1.5rem;">Preencha todas as informações.</p>
+            <div class="border-bottom mb-4"></div> <!-- Linha na parte inferior -->
+            <form action="{% url 'lancar' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="medicoNome">Nome:</label>
+                        <input type="text" class="form-control" id="medicoNome" name="nome_medico" placeholder="Nome completo" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="medicoEspecialidade">Especialização:</label>
+                        <input type="text" class="form-control" id="medicoEspecialidade" name="especializacao" placeholder="Ex: Clínico Geral" required>
+                    </div>
+                </div>
+
+                <div class="form-row mb-3">
+                    <div class="form-group col-md-6">
+                        <label for="medicoCrm">CRM:</label>
+                        <input type="text" class="form-control" id="medicoCrm" name="crm" placeholder="Digite o CRM" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="medicoFone">Telefone:</label>
+                        <input type="text" class="form-control" id="medicoFone" name="telefone" 
+                               placeholder="(99) 99999-9999" 
+                               oninput="formatPhoneNumber(this)" 
+                               required>
+                    </div>
+                </div>
+
+                <div class="form-row mb-4">
+                    <div class="form-group col-md-6">
+                        <label for="medicoEmail">E-mail:</label>
+                        <input type="email" class="form-control" id="medicoEmail" name="email"
+                               placeholder="exemplo@exemplo.com" 
+                               required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Cadastrar Médico</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function formatPhoneNumber(input) {
+    // Remove qualquer caractere que não seja número
+    let numbers = input.value.replace(/\D/g, '');
+
+    // Adiciona a formatação conforme o padrão (99) 99999-9999
+    if (numbers.length <= 10) {
+        input.value = numbers.replace(/^(\d{2})(\d{0,5})(\d{0,4})$/, '($1) $2-$3');
+    } else {
+        input.value = numbers.replace(/^(\d{2})(\d{5})(\d{0,4})$/, '($1) $2-$3');
+    }
+}
+</script>
+
+{% endblock %}

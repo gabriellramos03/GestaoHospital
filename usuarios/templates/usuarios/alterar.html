@@ -1,0 +1,87 @@
+    {% extends 'usuarios/base.html' %}
+
+    {% block aba %}Alterar Médicos{% endblock %}
+
+    {% block titulo %}Alterar Médicos{% endblock %}
+
+    {% block conteudo %}
+
+    <h3>Alteração de Médicos registrados</h3>
+    <hr>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Especialização</th>
+                    <th>Médico</th>
+                    <th>CRM</th>
+                    <th>Telefone</th>
+                    <th>E-mail</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody id="medicoTable">
+                {% for campo in lista_medicos %}
+                    <tr class="medico-row">
+                        <td>{{ campo.especializacao }}</td>
+                        <td>{{ campo.nome_medico }}</td>
+                        <td>{{ campo.crm }}</td>
+                        <td>{{ campo.telefone }}</td>
+                        <td>{{ campo.email }}</td>
+                        <td>
+                            <a href="{% url 'editar_verificacao' campo.pk %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'excluir_verificacao' campo.pk %}" class="btn btn-danger btn-sm">Excluir</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center">Nenhum registro encontrado.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Paginação -->
+    <div id="pagination" class="d-flex justify-content-end mt-3">
+        <!-- Os botões de paginação serão gerados aqui -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rowsPerPage = 8; // Número de linhas por página
+            const rows = document.querySelectorAll('.medico-row'); // Seleciona todas as linhas dos médicos
+            const totalRows = rows.length; // Total de registros
+            const totalPages = Math.ceil(totalRows / rowsPerPage); // Calcula o total de páginas
+            const paginationElement = document.getElementById('pagination');
+
+            function displayPage(page) {
+                const start = (page - 1) * rowsPerPage;
+                const end = start + rowsPerPage;
+
+                rows.forEach((row, index) => {
+                    row.style.display = (index >= start && index < end) ? '' : 'none'; // Mostra ou oculta a linha
+                });
+            }
+
+            function setupPagination() {
+                paginationElement.innerHTML = ''; // Limpa a lista de paginação
+
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.textContent = i;
+                    button.className = 'btn btn-outline-primary mx-1'; // Adiciona margem horizontal
+                    button.addEventListener('click', function() {
+                        displayPage(i); // Exibe a página correspondente ao botão clicado
+                    });
+                    paginationElement.appendChild(button);
+                }
+            }
+
+            setupPagination(); // Configura a paginação
+            displayPage(1); // Exibe a primeira página por padrão
+        });
+    </script>
+
+    <hr>
+    {% endblock %}

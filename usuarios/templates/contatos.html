@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <title>Guia Medico</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="hospital-gestao">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <meta name="author" content="hospital">
+  <meta name="generator" content="hospital">
+
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/slick/slick.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/slick/slick-theme.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/fancybox/jquery.fancybox.min.css' %}">
+  <link rel="stylesheet" href="{% static 'plugins/aos/aos.css' %}">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'home' %}">
+        <img class="logo" src="{% static 'images/logo.jpg' %}" alt="logo">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="ti-menu"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'lancar' %}">Cadastrar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'alterar' %}">Alterar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'visualizar' %}">Visualizar</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Usuário: {{ user.email }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>              
+            </ul>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+
+<section class="section page-title">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 m-auto">
+				<h1>Entre em Contato</h1>
+				<p>Se você tem alguma dúvida, sugestão ou precisa de assistência em nosso sistema de gestão hospitalar, estamos aqui para ajudar! Nossa equipe está pronta para fornecer o suporte necessário e garantir que você tenha a melhor experiência possível..</p>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="address">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-5 align-self-center">
+				<div class="block">
+					<div class="address-block text-center mb-5">
+						<div class="icon">
+							<i class="ti-mobile"></i>
+						</div>
+						<div class="details">
+							<h3>(69) 992216589</h3>
+							<h3>(69) 992645984</h3>
+						</div>
+					</div>
+					<div class="address-block text-center">
+						<div class="icon">
+							<i class="ti-map-alt"></i>
+						</div>
+						<div class="details">
+							<h3>Avenida 7 de Setembro, 1234, Centro, Porto Velho - RO, Brasil</h3>						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-7 mt-5 mt-lg-0">
+				<div class="google-map">
+                    <div id="map_canvas" data-latitude="-8.761285" data-longitude="-63.903453"></div>
+                </div>
+			</div>
+		</div>
+	</div>
+</section>
+<section class="contact-form section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="mb-5 text-center">Estamos prontos para ouvir você!</h2>
+			</div>
+			<div class="col-12">
+				<form action="">
+					<div class="row">
+						<div class="col-md-6 mb-2">
+							<input class="form-control main" type="text" placeholder="nome" required>
+						</div>
+						<div class="col-md-6 mb-2">
+							<input class="form-control main" type="email" placeholder="email" required>
+						</div>
+						<div class="col-md-12 mb-2">
+							<input class="form-control main" type="text" placeholder="assunto" required>
+						</div>
+						<div class="col-md-12 mb-2">
+							<textarea class="form-control main" name="sua menssagem" rows="10" placeholder="Descreva sua recomendação"></textarea>
+						</div>
+						<div class="col-12 text-right">
+							<button class="btn btn-main-md">Enviar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+    <div class="footer-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 m-md-auto align-self-center text-center">
+                    <div class="block">
+                        <a href="index.html"><img class="logo" src="{% static 'images/logoSemFundo.png' %}" alt="footer-logo"></a>
+                        <ul class="social-icon list-inline justify-content-center"> <!-- Adicionando justify-content-center -->
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                    <div class="block-2">
+                        <h6>Links uteis</h6>
+                        <ul>
+                            <li><a href="{% url 'home' %}">Pagina Incial</a></li>
+                            <li><a href="{% url 'lancar' %}">Cadastro</a></li>
+                            <li><a href="{% url 'alterar' %}">Alterar</a></li>
+                            <li><a href="{% url 'visualizar' %}">Visualizar</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                    <div class="block-2">
+                        <h6>Recursos</h6>
+                        <ul>
+                            <li><a href="#">E-mail Ultilizado: {{ user.email }}</a></li>
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="text-center bg-dark py-4">
+        <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Uendel &amp; Gabriel</small>
+    </div>
+
+    <div class="text-center bg-dark py-1">
+        <small><p>Criado por <a href="#">Uendel e Gabriel</a></p></small>
+    </div>
+</footer>
+  
+
+  <div class="scroll-top-to">
+    <i class="ti-angle-up"></i>
+  </div>
+  
+  <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+  <script src="{% static 'plugins/slick/slick.min.js' %}"></script>
+  <script src="{% static 'plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+  <script src="{% static 'plugins/syotimer/jquery.syotimer.min.js' %}"></script>
+  <script src="{% static 'plugins/aos/aos.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+  <script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+  <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>

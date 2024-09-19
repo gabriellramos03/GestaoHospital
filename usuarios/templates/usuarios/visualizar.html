@@ -1,0 +1,102 @@
+{% extends 'usuarios/base.html' %}
+
+{% block aba %}Visualizar Médicos{% endblock %}
+
+{% block titulo %}Visualizar Médicos{% endblock %}
+
+{% block conteudo %}
+
+<h3>Visualização de Médicos Registrados</h3>
+<hr>
+<form action="{% url 'visualizar' %}" method="POST">
+    {% csrf_token %}
+    <div class="filter mb-3">
+        <label for="medicoEspecialidade"><strong>Filtrar por Especialização:</strong></label>
+        <select name="especializacao" id="medicoEspecialidade" class="form-select" style="width: 250px;"> <!-- Ajuste o valor aqui -->
+            <option value="">Todas as Especializações</option>
+            {% for especializacao in lista_especializacoes %}
+                <option value="{{ especializacao }}" 
+                    {% if especializacao == especializacao_selecionada %} selected {% endif %}>
+                    {{ especializacao }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+    </div>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Especialização</th>
+                <th>Médico</th>
+                <th>CRM</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for medico in lista_medicos %}
+            <tr>
+                <td>{{ medico.especializacao }}</td>
+                <td>{{ medico.nome_medico }}</td>
+                <td>{{ medico.crm }}</td>
+                <td>{{ medico.telefone }}</td>
+                <td>{{ medico.email }}</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="5" class="text-center">Nenhum registro encontrado.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Paginação -->
+<div class="d-flex justify-content-between">
+    <div>
+        <p>Mostrando {{ lista_medicos.paginator.count }} registros</p>
+    </div>
+    <nav>
+        <ul class="pagination">
+            {% if lista_medicos.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="Primeira">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ lista_medicos.previous_page_number }}" aria-label="Anterior">
+                        <span aria-hidden="true">&lsaquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+            
+            {% for i in lista_medicos.paginator.page_range %}
+                {% if lista_medicos.number == i %}
+                    <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+            {% if lista_medicos.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ lista_medicos.next_page_number }}" aria-label="Próximo">
+                        <span aria-hidden="true">&rsaquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ lista_medicos.paginator.num_pages }}" aria-label="Última">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+
+<hr>
+{% endblock %}

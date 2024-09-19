@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <title>{% block aba %}Template base{% endblock %}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/themify-icons/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/slick/slick-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/fancybox/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/aos/aos.css' %}">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Responsive navbar-->
+    <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img class="logo" src="{% static 'images/logo.jpg' %}" alt="logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="ti-menu"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'lancar' %}">Cadastrar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'alterar' %}">Alterar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'visualizar' %}">Visualizar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contatos' %}">Contato</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Usuário: {{ user.email }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>              
+                </ul>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    <!-- Page Content-->
+    <div class="container px-4 px-lg-5">
+        <div class="card text-black my-5 py-4 text-center" style="background: linear-gradient(135deg, #ffffff, #e5eef8);">
+            <div class="card-body">
+                <p class="text-back m-0" style="font-size: 2rem; font-weight: bold; line-height: 1.5;">
+                    {% block titulo %}Seja bem-vindo(a) {{ user.first_name }} ao Guia Médico, aqui encontrará os profissionais disponíveis.{% endblock %}
+                </p>
+            </div>
+        </div>
+               
+    
+        <div class="row gx-4 gx-lg-5">
+            {% block conteudo %}
+            <div class="col-md-4 mb-5">
+                <div class="card h-100" style="border: none; border-radius: 15px; transition: transform 0.3s;">
+                    <div class="card-body" style="background-color: #FFFFFF; border-radius: 15px;">
+                        <h2 class="card-title" style="font-size: 1.5rem; color: #333;">Cadastrar Médicos</h2>
+                        <p class="card-text">Nesta opção você poderá cadastrar todos os médicos de acordo com as especialidades.</p>
+                    </div>
+                    <div class="card-footer" style="background-color: #F7F7F7; border-radius: 0 0 15px 15px;">
+                        <a class="btn btn-primary btn-sm" href="{% url 'lancar' %}">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-4 mb-5">
+                <div class="card h-100" style="border: none; border-radius: 15px; transition: transform 0.3s;">
+                    <div class="card-body" style="background-color: #FFFFFF; border-radius: 15px;">
+                        <h2 class="card-title" style="font-size: 1.5rem; color: #333;">Alterar Médicos</h2>
+                        <p class="card-text">Nesta opção você poderá alterar todos os médicos já cadastrados de acordo com as especialidades, inclusive excluir.</p>
+                    </div>
+                    <div class="card-footer" style="background-color: #F7F7F7; border-radius: 0 0 15px 15px;">
+                        <a class="btn btn-primary btn-sm" href="{% url 'alterar' %}">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-md-4 mb-5">
+                <div class="card h-100" style="border: none; border-radius: 15px; transition: transform 0.3s;">
+                    <div class="card-body" style="background-color: #FFFFFF; border-radius: 15px;">
+                        <h2 class="card-title" style="font-size: 1.5rem; color: #333;">Visualizar Médicos</h2>
+                        <p class="card-text">Nesta opção você poderá visualizar todos os médicos já cadastrados de acordo com as especialidades.</p>
+                    </div>
+                    <div class="card-footer" style="background-color: #F7F7F7; border-radius: 0 0 15px 15px;">
+                        <a class="btn btn-primary btn-sm" href="{% url 'visualizar' %}">Clique aqui</a>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+    
+    <!-- Footer-->
+    <footer>
+        <div class="footer-main">
+          <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 m-md-auto align-self-center text-center">
+                    <div class="block">
+                        <a href="index.html"><img class="logo" src="{% static 'images/logoSemFundo.png' %}" alt="footer-logo"></a>
+                        <ul class="social-icon list-inline justify-content-center"> <!-- Adicionando justify-content-center -->
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-twitter"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="#"><i class="ti-instagram"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+              {% if user.is_authenticated %}
+              <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                <div class="block-2">
+                  <h6>Links uteis</h6>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Pagina Incial</a></li>
+                        <li><a href="{% url 'lancar' %}">Cadastro</a></li>
+                        <li><a href="{% url 'alterar' %}">Alterar</a></li>
+                        <li><a href="{% url 'visualizar' %}">Visualizar</a></li>
+                    </ul>
+                </div>
+              </div>
+              <div class="col-lg-2 col-md-3 col-6 mt-5 mt-lg-0">
+                <div class="block-2">
+                  <h6>Recursos</h6>
+                  <ul>
+                    <li><a href="#">E-mail Ultilizado: {{ user.email }}</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                  </ul>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        <div class="text-center bg-dark py-4">
+          <small class="text-secondary">Copyright &copy; <script>document.write(new Date().getFullYear())</script>. Uendel &amp; Gabriel</small class="text-secondary">
+        </div>
+      
+          <div class="text-center bg-dark py-1">
+              <small> <p>Criado por<a href="#">Uendel e Gabriel</a></p></small class="text-secondary">
+           </div>
+      </footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'plugins/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'plugins/slick/slick.min.js' %}"></script>
+    <script src="{% static 'plugins/fancybox/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'plugins/syotimer/jquery.syotimer.min.js' %}"></script>
+    <script src="{% static 'plugins/aos/aos.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g"></script>
+    <script src="{% static 'plugins/google-map/gmap.js' %}"></script>
+    <script src="{% static 'js/script.js' %}"></script>
+    
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
